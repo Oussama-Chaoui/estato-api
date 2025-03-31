@@ -1,28 +1,34 @@
 <?php
 
+use App\Enums\ROLE;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name'); // added name field
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password'); // using Laravel convention for password hash
-            $table->string('role'); // 'admin', 'agent', 'user'
-            $table->string('phone')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('roles', function (Blueprint $table) {
+        $table->id();
+        $table->enum('name', array_column(ROLE::cases(), 'value'));
+        $table->timestamps();
+      }
+    );
+  }
 
-    public function down()
-    {
-        Schema::dropIfExists('users');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('roles');
+  }
 };
