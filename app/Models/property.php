@@ -33,6 +33,11 @@ class Property extends BaseModel
     return $this->belongsTo(Location::class);
   }
 
+  public function agents()
+  {
+    return $this->belongsToMany(Agent::class, 'properties_agents');
+  }
+
   /**
    * Get the validation rules for a property.
    *

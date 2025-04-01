@@ -33,6 +33,11 @@ class Agent extends BaseModel
     return $this->belongsToMany(Language::class, 'agents_languages');
   }
 
+  public function properties()
+  {
+    return $this->belongsToMany(Property::class, 'properties_agents');
+  }
+
   public function rules($id = null)
   {
     $id = $id ?? request()->route('id');
