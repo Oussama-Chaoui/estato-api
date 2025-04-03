@@ -38,6 +38,11 @@ class Property extends BaseModel
     return $this->belongsToMany(Agent::class, 'properties_agents');
   }
 
+  public function amenities()
+  {
+    return $this->belongsToMany(Amenity::class, 'properties_amenities')->withPivot('notes');
+  }
+
   /**
    * Get the validation rules for a property.
    *

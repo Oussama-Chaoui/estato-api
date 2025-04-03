@@ -12,7 +12,6 @@ return new class extends Migration
   public function up(): void
   {
     Schema::create('agents_languages', function (Blueprint $table) {
-      $table->id();
       $table->foreignId('agent_id')->constrained('agents')->cascadeOnDelete();
       $table->foreignId('language_id')->constrained('languages')->cascadeOnDelete();
 

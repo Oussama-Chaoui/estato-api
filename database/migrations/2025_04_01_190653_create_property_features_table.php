@@ -16,7 +16,7 @@ return new class extends Migration
       $table->foreignId('property_id')->constrained('properties')->cascadeOnDelete();
       $table->integer('bedrooms');
       $table->integer('bathrooms');
-      $table->integer('sqft');
+      $table->integer('area');
       $table->integer('garages');
       $table->integer('floors')->default(1);
       $table->boolean('pool')->default(false);

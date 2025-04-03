@@ -9,34 +9,35 @@ use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
 {
-    private ACLService $aclService;
+  private ACLService $aclService;
 
-    public function __construct(ACLService $aclService)
-    {
-        $this->aclService = $aclService;
-    }
+  public function __construct(ACLService $aclService)
+  {
+    $this->aclService = $aclService;
+  }
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        // Define roles
-        $userRole = $this->aclService->createRole(ROLE_ENUM::USER);
-        $adminRole = $this->aclService->createRole(ROLE_ENUM::ADMIN);
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    // Define roles
+    $userRole = $this->aclService->createRole(ROLE_ENUM::USER);
+    $adminRole = $this->aclService->createRole(ROLE_ENUM::ADMIN);
+    $agentRole = $this->aclService->createRole(ROLE_ENUM::AGENT);
 
-        // Create scoped permissions
-        $this->aclService->createScopePermissions('users', ['create', 'read', 'update', 'delete']);
+    // Create scoped permissions
+    $this->aclService->createScopePermissions('users', ['create', 'read', 'update', 'delete']);
 
-        // Assign permissions to roles
-        $this->aclService->assignScopePermissionsToRole($adminRole, 'users', ['create', 'read', 'update', 'delete']);
-    }
+    // Assign permissions to roles
+    $this->aclService->assignScopePermissionsToRole($adminRole, 'users', ['create', 'read', 'update', 'delete']);
+  }
 
-    public function rollback()
-    {
-        $adminRole = Role::where('name', ROLE_ENUM::ADMIN)->first();
-        $this->aclService->removeScopePermissionsFromRole($adminRole, 'users', ['create', 'read', 'update', 'delete']);
-    }
+  public function rollback()
+  {
+    $adminRole = Role::where('name', ROLE_ENUM::ADMIN)->first();
+    $this->aclService->removeScopePermissionsFromRole($adminRole, 'users', ['create', 'read', 'update', 'delete']);
+  }
 }
