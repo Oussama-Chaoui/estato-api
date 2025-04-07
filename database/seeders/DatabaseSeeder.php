@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
       $seeders = array_merge($seeders, [
         AgentSeeder::class,
         AmenitySeeder::class,
+        LocationSeeder::class,
         PropertySeeder::class,
       ]);
     }

@@ -18,17 +18,7 @@ class PropertySeeder extends Seeder
    */
   public function run(): void
   {
-    // Create or retrieve the Tangier location with accurate coordinates.
-    $location = Location::firstOrCreate(
-      [
-        'region' => 'Tangier-Tetouan-Al Hoceima',
-        'city'   => 'Tangier',
-      ],
-      [
-        'latitude'  => 35.7595,
-        'longitude' => -5.8340,
-      ]
-    );
+    $location = Location::where('city', 'Tangier')->first();
 
     $properties = [
       [
