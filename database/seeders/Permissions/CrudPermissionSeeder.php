@@ -2,30 +2,33 @@
 
 namespace Database\Seeders\Permissions;
 
+use App\Enums\ROLE as ROLE_ENUM;
+use App\Models\Role;
 use App\Services\ACLService;
 use Illuminate\Database\Seeder;
 
 class CrudPermissionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run(ACLService $aclService)
-    {
-        /*
-            // Here, include project specific permissions. E.G.:
-            $aclService->createScopePermissions('interests', ['create', 'read', 'update', 'delete', 'import', 'export']);
-            $aclService->createScopePermissions('games', ['create', 'read', 'read_own', 'update', 'delete']);
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run(ACLService $aclService)
+  {
+    // Create Scoped permissions
+    $aclService->createScopePermissions('properties', ['create', 'read', 'read_own', 'update', 'delete']);
 
-            $adminRole = Role::where('name', ROLE_ENUM::ADMIN)->first();
-            $aclService->assignScopePermissionsToRole($adminRole, 'interests', ['create', 'read', 'update', 'delete', 'import', 'export']);
-            $aclService->assignScopePermissionsToRole($adminRole, 'games', ['create', 'read', 'read_own', 'update', 'delete']);
+    // Assign permissions to roles
+    $adminRole = Role::where('name', ROLE_ENUM::ADMIN)->first();
+    $agentRole = Role::where('name', ROLE_ENUM::AGENT)->first();
+    $aclService->assignScopePermissionsToRole($adminRole, 'properties', ['create', 'read', 'update', 'delete']);
+    $aclService->assignScopePermissionsToRole($agentRole, 'properties', ['read']);
+  }
 
-            $advertiserRole = Role::where('name', 'advertiser')->first();
-            $aclService->assignScopePermissionsToRole($advertiserRole, 'interests', ['read']);
-            $aclService->assignScopePermissionsToRole($advertiserRole, 'games', ['create', 'read_own']);
-        */
-    }
+  public function rollback(ACLService $aclService)
+  {
+    $adminRole = Role::where('name', ROLE_ENUM::ADMIN)->first();
+    $aclService->removeScopePermissionsFromRole($adminRole, 'properties', ['create', 'read', 'update', 'delete']);
+  }
 }

@@ -25,6 +25,30 @@ class Property extends BaseModel
     'has_vr',
   ];
 
+  protected static function booted()
+  {
+    parent::booted();
+
+    static::created(function ($property) {
+      $agents = $property->agents;
+      \Log::info('Property created:', ['property' => $property]);
+      foreach ($agents as $agent) {
+        if ($agent->user) {
+          $agent->user->givePermission('properties.' . $property->id . '.read');
+        }
+      }
+    });
+
+    static::deleted(function ($property) {
+      $agents = $property->agents;
+      foreach ($agents as $agent) {
+        if ($agent->user) {
+          $agent->user->revokePermission('properties.' . $property->id . '.read');
+        }
+      }
+    });
+  }
+
   /**
    * Get the location associated with the property.
    */
@@ -35,7 +59,7 @@ class Property extends BaseModel
 
   public function agents()
   {
-    return $this->belongsToMany(Agent::class, 'properties_agents');
+    return $this->belongsToMany(Agent::class, 'properties_agents')->using(PropertyAgent::class);
   }
 
   public function amenities()

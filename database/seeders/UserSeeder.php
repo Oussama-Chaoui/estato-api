@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
   {
     if (env('APP_ENV') === 'prod') {
       $admin = User::firstOrCreate(
-        ['email' => 'admin@example.fr'],
+        ['email' => 'admin@example.com'],
         [
           'name'     => 'Oussama',
           'password' => bcrypt('fnFPB3TzGWTBoLA'),
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
       $admin->assignRole(ROLE::ADMIN);
 
       $user = User::firstOrCreate(
-        ['email' => 'user@example.fr'],
+        ['email' => 'user@example.com'],
         [
           'name'     => 'Taha',
           'password' => bcrypt('nRapnRYRdxcE'),
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
       $user->assignRole(ROLE::USER);
 
       $agent = User::firstOrCreate(
-        ['email' => 'agent@example.fr'],
+        ['email' => 'agent@example.com'],
         [
           'name'     => 'Khalid',
           'password' => bcrypt('agent_prod_secret'),
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
       $agent->assignRole(ROLE::AGENT);
 
       $agent2 = User::firstOrCreate(
-        ['email' => 'agent2@example.fr'],
+        ['email' => 'agent2@example.com'],
         [
           'name'     => 'Sami',
           'password' => bcrypt('agent2_prod_secret'),
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
       $agent2->assignRole(ROLE::AGENT);
 
       $agent3 = User::firstOrCreate(
-        ['email' => 'agent3@example.fr'],
+        ['email' => 'agent3@example.com'],
         [
           'name'     => 'Amina',
           'password' => bcrypt('agent3_prod_secret'),
@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
       $agent3->assignRole(ROLE::AGENT);
     } else {
       $admin = User::firstOrCreate(
-        ['email' => 'admin@example.fr'],
+        ['email' => 'admin@example.com'],
         [
           'name'     => 'Oussama',
           'password' => bcrypt('admin'),
@@ -77,7 +77,7 @@ class UserSeeder extends Seeder
       $admin->assignRole(ROLE::ADMIN);
 
       $user = User::firstOrCreate(
-        ['email' => 'user@example.fr'],
+        ['email' => 'user@example.com'],
         [
           'name'     => 'Taha',
           'password' => bcrypt('user'),
@@ -87,7 +87,7 @@ class UserSeeder extends Seeder
       $user->assignRole(ROLE::USER);
 
       $agent = User::firstOrCreate(
-        ['email' => 'agent@example.fr'],
+        ['email' => 'agent@example.com'],
         [
           'name'     => 'Khalid',
           'password' => bcrypt('agent'),
@@ -97,7 +97,7 @@ class UserSeeder extends Seeder
       $agent->assignRole(ROLE::AGENT);
 
       $agent2 = User::firstOrCreate(
-        ['email' => 'agent2@example.fr'],
+        ['email' => 'agent2@example.com'],
         [
           'name'     => 'Sami',
           'password' => bcrypt('agent2'),
@@ -107,7 +107,7 @@ class UserSeeder extends Seeder
       $agent2->assignRole(ROLE::AGENT);
 
       $agent3 = User::firstOrCreate(
-        ['email' => 'agent3@example.fr'],
+        ['email' => 'agent3@example.com'],
         [
           'name'     => 'Amina',
           'password' => bcrypt('agent3'),

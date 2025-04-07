@@ -35,7 +35,7 @@ class Agent extends BaseModel
 
   public function properties()
   {
-    return $this->belongsToMany(Property::class, 'properties_agents');
+    return $this->belongsToMany(Property::class, 'properties_agents')->using(PropertyAgent::class);
   }
 
   public function rules($id = null)

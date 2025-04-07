@@ -7,6 +7,7 @@ use App\Models\Location;
 use App\Models\Property;
 use App\Enums\PROPERTY_TYPE;
 use App\Enums\PROPERTY_STATUS;
+use App\Models\Agent;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -87,26 +88,25 @@ class PropertySeeder extends Seeder
       // Attach agents to the property based on its title and status.
       if ($property->status === PROPERTY_STATUS::FOR_SALE->value) {
         if ($property->title === 'Luxurious Apartment in Tangier - For Sale 1') {
-          $agent = \App\Models\Agent::where('licence_number', 'LIC-001')->first();
+          $agent = Agent::where('licence_number', 'LIC-001')->first();
           if ($agent) {
             $property->agents()->syncWithoutDetaching([$agent->id]);
           }
         } elseif ($property->title === 'Modern Apartment in Tangier - For Sale 2') {
-          $agent = \App\Models\Agent::where('licence_number', 'LIC-002')->first();
+          $agent = Agent::where('licence_number', 'LIC-002')->first();
           if ($agent) {
             $property->agents()->syncWithoutDetaching([$agent->id]);
           }
         }
       } elseif ($property->status === PROPERTY_STATUS::FOR_RENT->value) {
         if ($property->title === 'Cozy Apartment in Tangier - For Rent 1') {
-          $agent = \App\Models\Agent::where('licence_number', 'LIC-003')->first();
+          $agent = Agent::where('licence_number', 'LIC-003')->first();
           if ($agent) {
             $property->agents()->syncWithoutDetaching([$agent->id]);
           }
         } elseif ($property->title === 'Spacious Apartment in Tangier - For Rent 2') {
-          // For this property, we attach two agents.
-          $agent1 = \App\Models\Agent::where('licence_number', 'LIC-001')->first();
-          $agent2 = \App\Models\Agent::where('licence_number', 'LIC-003')->first();
+          $agent1 = Agent::where('licence_number', 'LIC-001')->first();
+          $agent2 = Agent::where('licence_number', 'LIC-003')->first();
           $agentIds = [];
           if ($agent1) {
             $agentIds[] = $agent1->id;
