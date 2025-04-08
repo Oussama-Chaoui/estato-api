@@ -25,13 +25,18 @@ class Property extends BaseModel
     'has_vr',
   ];
 
+  protected $with = [
+    'location',
+    'agents',
+    'amenities',
+  ];
+
   protected static function booted()
   {
     parent::booted();
 
     static::created(function ($property) {
       $agents = $property->agents;
-      \Log::info('Property created:', ['property' => $property]);
       foreach ($agents as $agent) {
         if ($agent->user) {
           $agent->user->givePermission('properties.' . $property->id . '.read');

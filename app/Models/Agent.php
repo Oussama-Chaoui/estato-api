@@ -18,6 +18,12 @@ class Agent extends BaseModel
     'user_id',
   ];
 
+  protected $with = [
+    'user',
+    'photo',
+    'languages',
+  ];
+
   public function user()
   {
     return $this->belongsTo(User::class, 'user_id');

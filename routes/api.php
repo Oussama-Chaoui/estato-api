@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,21 @@ Route::middleware('auth:api')->group(
     Route::prefix('users')->name('users.')->group(
       function () {
         Route::controller(UserController::class)->group(
+          function () {
+            Route::post('/', 'createOne');
+            Route::get('/{id}', 'readOne');
+            Route::get('/', 'readAll');
+            Route::put('/{id}', 'updateOne');
+            Route::patch('/{id}', 'patchOne');
+            Route::delete('/{id}', 'deleteOne');
+          }
+        );
+      }
+    );
+
+    Route::prefix('properties')->name('properties.')->group(
+      function () {
+        Route::controller(PropertyController::class)->group(
           function () {
             Route::post('/', 'createOne');
             Route::get('/{id}', 'readOne');
