@@ -23,7 +23,7 @@ return new class extends Migration
       $table->string('currency')->default('MAD');
       $table->integer('year_built');
       $table->integer('lot_size');
-      $table->enum('property_type', array_column(PROPERTY_TYPE::cases(), 'value'));
+      $table->enum('type', array_column(PROPERTY_TYPE::cases(), 'value'));
       $table->enum('status', array_column(PROPERTY_STATUS::cases(), 'value'))
         ->default(PROPERTY_STATUS::FOR_SALE->value);
       $table->boolean('has_vr')->default(false);

@@ -20,7 +20,7 @@ class Property extends BaseModel
     'currency',
     'year_built',
     'lot_size',
-    'property_type',
+    'type',
     'status',
     'has_vr',
   ];
@@ -90,7 +90,7 @@ class Property extends BaseModel
       'currency'       => 'required|string',
       'year_built'     => 'required|integer',
       'lot_size'       => 'required|integer|min:0',
-      'property_type'  => [
+      'type'  => [
         'required',
         'string',
         Rule::in(array_column(PROPERTY_TYPE::cases(), 'value'))
