@@ -29,7 +29,15 @@ class Property extends BaseModel
     'location',
     'agents',
     'amenities',
+    'images',
+    'descriptions',
+    'features',
   ];
+
+  protected $casts = [
+    'features' => 'array',
+  ];
+
 
   protected static function booted()
   {
@@ -70,6 +78,19 @@ class Property extends BaseModel
   public function amenities()
   {
     return $this->belongsToMany(Amenity::class, 'properties_amenities')->withPivot('notes');
+  }
+
+  public function images()
+  {
+    return $this->hasMany(PropertyImage::class);
+  }
+  public function descriptions()
+  {
+    return $this->hasMany(PropertyDescription::class);
+  }
+  public function features()
+  {
+    return $this->hasMany(PropertyFeature::class);
   }
 
   /**
