@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AgentController;
+use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
@@ -66,6 +69,51 @@ Route::middleware('auth:api')->group(
     Route::prefix('properties')->name('properties.')->group(
       function () {
         Route::controller(PropertyController::class)->group(
+          function () {
+            Route::post('/', 'createOne');
+            Route::get('/{id}', 'readOne');
+            Route::get('/', 'readAll');
+            Route::put('/{id}', 'updateOne');
+            Route::patch('/{id}', 'patchOne');
+            Route::delete('/{id}', 'deleteOne');
+          }
+        );
+      }
+    );
+
+    Route::prefix('agents')->name('agents.')->group(
+      function () {
+        Route::controller(AgentController::class)->group(
+          function () {
+            Route::post('/', 'createOne');
+            Route::get('/{id}', 'readOne');
+            Route::get('/', 'readAll');
+            Route::put('/{id}', 'updateOne');
+            Route::patch('/{id}', 'patchOne');
+            Route::delete('/{id}', 'deleteOne');
+          }
+        );
+      }
+    );
+
+    Route::prefix('locations')->name('locations.')->group(
+      function () {
+        Route::controller(LocationController::class)->group(
+          function () {
+            Route::post('/', 'createOne');
+            Route::get('/{id}', 'readOne');
+            Route::get('/', 'readAll');
+            Route::put('/{id}', 'updateOne');
+            Route::patch('/{id}', 'patchOne');
+            Route::delete('/{id}', 'deleteOne');
+          }
+        );
+      }
+    );
+
+    Route::prefix('amenities')->name('amenities.')->group(
+      function () {
+        Route::controller(AmenityController::class)->group(
           function () {
             Route::post('/', 'createOne');
             Route::get('/{id}', 'readOne');

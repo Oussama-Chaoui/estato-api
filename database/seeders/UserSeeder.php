@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\ROLE;
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -26,15 +27,25 @@ class UserSeeder extends Seeder
       );
       $admin->assignRole(ROLE::ADMIN);
 
-      $user = User::firstOrCreate(
-        ['email' => 'user@example.com'],
+      $client = User::firstOrCreate(
+        ['email' => 'client@example.com'],
         [
           'name'     => 'Taha',
           'password' => bcrypt('nRapnRYRdxcE'),
           'phone'    => '0623456789',
         ]
       );
-      $user->assignRole(ROLE::USER);
+      $client->assignRole(ROLE::CLIENT);
+
+      Client::firstOrCreate(
+        ['user_id' => $client->id],
+        [
+          'nic_number' => 'NIC-1234567',
+          'passport'   => null,
+          'image_id' => null,
+        ]
+      );
+
 
       $agent = User::firstOrCreate(
         ['email' => 'agent@example.com'],
@@ -76,15 +87,24 @@ class UserSeeder extends Seeder
       );
       $admin->assignRole(ROLE::ADMIN);
 
-      $user = User::firstOrCreate(
-        ['email' => 'user@example.com'],
+      $client = User::firstOrCreate(
+        ['email' => 'client@example.com'],
         [
           'name'     => 'Taha',
           'password' => bcrypt('user'),
           'phone'    => '0623456789',
         ]
       );
-      $user->assignRole(ROLE::USER);
+      $client->assignRole(ROLE::CLIENT);
+
+      Client::firstOrCreate(
+        ['user_id' => $client->id],
+        [
+          'nic_number' => 'NIC-1234567',
+          'passport'   => null,
+          'image_id' => null,
+        ]
+      );
 
       $agent = User::firstOrCreate(
         ['email' => 'agent@example.com'],

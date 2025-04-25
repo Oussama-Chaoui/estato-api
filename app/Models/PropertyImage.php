@@ -15,6 +15,10 @@ class PropertyImage extends BaseModel
     'caption',
   ];
 
+  protected $with = [
+    'upload',
+  ];
+
   /**
    * Get the property associated with this image.
    */
@@ -29,6 +33,17 @@ class PropertyImage extends BaseModel
   public function upload()
   {
     return $this->belongsTo(Upload::class, 'image_id');
+  }
+
+  protected static function booted()
+  {
+    parent::booted();
+
+    static::deleting(function (PropertyImage $pi) {
+      if ($pi->upload) {
+        $pi->upload->delete();
+      }
+    });
   }
 
   function rules($id = null)

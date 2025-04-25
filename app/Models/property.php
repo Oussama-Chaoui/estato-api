@@ -16,7 +16,11 @@ class Property extends BaseModel
     'title',
     'street_address',
     'description',
-    'price',
+    'monthly_price',
+    'daily_price',
+    'sale_price',
+    'daily_price_enabled',
+    'monthly_price_enabled',
     'currency',
     'year_built',
     'lot_size',
@@ -56,15 +60,12 @@ class Property extends BaseModel
       $agents = $property->agents;
       foreach ($agents as $agent) {
         if ($agent->user) {
-          $agent->user->revokePermission('properties.' . $property->id . '.read');
+          $agent->user->removeAllPermissions('properties', $property->id);
         }
       }
     });
   }
 
-  /**
-   * Get the location associated with the property.
-   */
   public function location()
   {
     return $this->belongsTo(Location::class);
@@ -93,6 +94,11 @@ class Property extends BaseModel
     return $this->hasMany(PropertyFeature::class);
   }
 
+  public function rentals()
+  {
+    return $this->hasMany(PropertyRental::class);
+  }
+
   /**
    * Get the validation rules for a property.
    *
@@ -107,21 +113,25 @@ class Property extends BaseModel
       'title'          => 'required|string|max:255',
       'street_address' => 'required|string',
       'description'    => 'required|string',
-      'price'          => 'required|numeric|min:0',
+      'monthly_price'  => 'required|numeric|min:0',
+      'daily_price'    => 'required|numeric|min:0',
+      'sale_price'     => 'required|numeric|min:0',
+      'daily_price_enabled' => 'boolean',
+      'monthly_price_enabled' => 'boolean',
       'currency'       => 'required|string',
       'year_built'     => 'required|integer',
       'lot_size'       => 'required|integer|min:0',
-      'type'  => [
+      'type' => [
         'required',
         'string',
         Rule::in(array_column(PROPERTY_TYPE::cases(), 'value'))
       ],
-      'status'         => [
+      'status' => [
         'required',
         'string',
         Rule::in(array_column(PROPERTY_STATUS::cases(), 'value'))
       ],
-      'has_vr'         => 'boolean',
+      'has_vr' => 'boolean',
     ];
   }
 }

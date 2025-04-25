@@ -19,7 +19,11 @@ return new class extends Migration
       $table->string('title');
       $table->text('street_address');
       $table->text('description');
-      $table->decimal('price', 15, 2);
+      $table->decimal('monthly_price', 10, 2)->nullable();
+      $table->decimal('daily_price', 10, 2)->nullable();
+      $table->decimal('sale_price', 10, 2)->nullable();
+      $table->boolean('daily_price_enabled')->default(true);
+      $table->boolean('monthly_price_enabled')->default(true);
       $table->string('currency')->default('MAD');
       $table->integer('year_built');
       $table->integer('lot_size');

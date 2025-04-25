@@ -19,7 +19,7 @@ class UploadController extends CrudController
         'file' => 'required|file',
     ];
 
-    protected $restricted = ['read_one', 'read_all', 'update', 'delete'];
+    protected $restricted = ['read_one', 'read_all'];
 
     protected function getTable()
     {

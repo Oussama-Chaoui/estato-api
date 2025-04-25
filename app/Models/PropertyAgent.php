@@ -43,7 +43,7 @@ class PropertyAgent extends Pivot
       $agent = $pivot->agent;
 
       if ($agent && $agent->user) {
-        $agent->user->revokePermission('properties.' . $property->id . '.read');
+        $agent->user->removeAllPermissions('properties', $property->id);
       }
     });
   }

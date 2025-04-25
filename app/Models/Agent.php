@@ -13,7 +13,7 @@ class Agent extends BaseModel
     'experience',
     'bio',
     'photo_id',
-    'agancy_name',
+    'agency_name',
     'agency_address',
     'user_id',
   ];
@@ -44,6 +44,11 @@ class Agent extends BaseModel
     return $this->belongsToMany(Property::class, 'properties_agents')->using(PropertyAgent::class);
   }
 
+  public function rentals()
+  {
+    return $this->hasMany(PropertyRental::class, 'agent_id');
+  }
+
   public function rules($id = null)
   {
     $id = $id ?? request()->route('id');
@@ -52,7 +57,7 @@ class Agent extends BaseModel
       'experience'     => 'required|integer|min:0',
       'bio'            => 'nullable|string',
       'photo_id'       => 'nullable|exists:uploads,id',
-      'agancy_name'    => 'required|string',
+      'agency_name'    => 'required|string',
       'agency_address' => 'required|string',
       'user_id'        => 'required|exists:users,id',
     ];

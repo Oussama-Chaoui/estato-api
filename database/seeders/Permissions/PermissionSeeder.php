@@ -27,6 +27,7 @@ class PermissionSeeder extends Seeder
     $userRole = $this->aclService->createRole(ROLE_ENUM::USER);
     $adminRole = $this->aclService->createRole(ROLE_ENUM::ADMIN);
     $agentRole = $this->aclService->createRole(ROLE_ENUM::AGENT);
+    $clientRole = $this->aclService->createRole(ROLE_ENUM::CLIENT);
 
     // Create scoped permissions
     $this->aclService->createScopePermissions('users', ['create', 'read', 'update', 'delete']);

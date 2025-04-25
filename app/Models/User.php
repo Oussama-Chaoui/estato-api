@@ -143,6 +143,11 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     return $this->hasOne(Agent::class);
   }
 
+  public function propertyRented()
+  {
+    return $this->hasMany(PropertyRental::class, 'user_id');
+  }
+
   public function roles()
   {
     return $this->belongsToMany(Role::class, 'users_roles');
