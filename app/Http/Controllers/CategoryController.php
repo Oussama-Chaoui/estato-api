@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Location;
+use App\Models\Category;
 
-class LocationController extends CrudController
+class CategoryController extends CrudController
 {
-  protected $table = 'locations';
+  protected $table = 'categories';
+  protected $modelClass = Category::class;
   protected $restricted = ['create', 'update', 'delete'];
-
-  protected $modelClass = Location::class;
 
   protected function getTable()
   {

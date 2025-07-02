@@ -24,10 +24,19 @@ class AgentSeeder extends Seeder
           'photo_id'       => null,
           'agency_name'    => 'Acme Realty',
           'agency_address' => '123 Rue de la Paix, Marrakech, Morocco',
-          'user_id'        => 3,
+          'user_id'        => 1,
         ],
         [
           'licence_number' => 'LIC-002',
+          'experience'     => 5,
+          'bio'            => 'Experienced agent with a strong track record.',
+          'photo_id'       => null,
+          'agency_name'    => 'Acme Realty',
+          'agency_address' => '123 Rue de la Paix, Marrakech, Morocco',
+          'user_id'        => 3,
+        ],
+        [
+          'licence_number' => 'LIC-003',
           'experience'     => 4,
           'bio'            => 'Dynamic agent known for innovative solutions.',
           'photo_id'       => null,
@@ -36,7 +45,7 @@ class AgentSeeder extends Seeder
           'user_id'        => 4,
         ],
         [
-          'licence_number' => 'LIC-003',
+          'licence_number' => 'LIC-004',
           'experience'     => 8,
           'bio'            => 'Expert agent with a deep understanding of the local market.',
           'photo_id'       => null,
@@ -46,12 +55,12 @@ class AgentSeeder extends Seeder
         ],
       ];
 
-    $arabicLanguage = Language::createOrFirst([
+    $arabicLanguage = Language::firstOrCreate([
       'name' => LANGUAGE_ENUM::ARABIC->value,
     ]);
 
     foreach ($agents as $agent) {
-      $agent = Agent::createOrFirst([
+      $agent = Agent::firstOrCreate([
         'licence_number' => $agent['licence_number']
       ], $agent);
 

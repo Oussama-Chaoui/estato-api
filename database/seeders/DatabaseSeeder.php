@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
         AmenitySeeder::class,
         LocationSeeder::class,
         PropertySeeder::class,
+        CategorySeeder::class,
+        TagSeeder::class,
       ]);
     }
 

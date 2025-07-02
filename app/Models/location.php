@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Classes\DataTableParams;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Location extends BaseModel
@@ -21,6 +22,19 @@ class Location extends BaseModel
   public function properties()
   {
     return $this->hasMany(Property::class);
+  }
+
+  public function scopeDataTable($query, DataTableParams $params)
+  {
+    if ($params->hasOrderParam()) {
+      $query->dataTableSort($params->orderColumn, $params->orderDir);
+    }
+
+    if ($params->hasFilterParam()) {
+      $this->filter($query, $params->filterParam);
+    }
+
+    return $query;
   }
 
   /**

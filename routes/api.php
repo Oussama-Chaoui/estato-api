@@ -3,8 +3,11 @@
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -71,8 +74,6 @@ Route::middleware('auth:api')->group(
         Route::controller(PropertyController::class)->group(
           function () {
             Route::post('/', 'createOne');
-            Route::get('/{id}', 'readOne');
-            Route::get('/', 'readAll');
             Route::put('/{id}', 'updateOne');
             Route::patch('/{id}', 'patchOne');
             Route::delete('/{id}', 'deleteOne');
@@ -101,8 +102,6 @@ Route::middleware('auth:api')->group(
         Route::controller(LocationController::class)->group(
           function () {
             Route::post('/', 'createOne');
-            Route::get('/{id}', 'readOne');
-            Route::get('/', 'readAll');
             Route::put('/{id}', 'updateOne');
             Route::patch('/{id}', 'patchOne');
             Route::delete('/{id}', 'deleteOne');
@@ -126,6 +125,33 @@ Route::middleware('auth:api')->group(
       }
     );
 
+    Route::prefix('posts')->name('posts.')->group(function () {
+      Route::controller(PostController::class)->group(function () {
+        Route::post('/', 'createOne');
+        Route::put('/{id}', 'updateOne');
+        Route::patch('/{id}', 'patchOne');
+        Route::delete('/{id}', 'deleteOne');
+      });
+    });
+
+    Route::prefix('categories')->name('categories.')->group(function () {
+      Route::controller(CategoryController::class)->group(function () {
+        Route::post('/',      'createOne');
+        Route::put('/{id}',   'updateOne');
+        Route::patch('/{id}', 'patchOne');
+        Route::delete('/{id}', 'deleteOne');
+      });
+    });
+
+    Route::prefix('tags')->name('tags.')->group(function () {
+      Route::controller(TagController::class)->group(function () {
+        Route::post('/',      'createOne');
+        Route::put('/{id}',   'updateOne');
+        Route::patch('/{id}', 'patchOne');
+        Route::delete('/{id}', 'deleteOne');
+      });
+    });
+
     Route::prefix('uploads')->name('uploads.')->group(
       function () {
         Route::controller(UploadController::class)->group(
@@ -142,6 +168,49 @@ Route::middleware('auth:api')->group(
     );
   }
 );
+
+Route::prefix('locations')->name('locations.')->group(
+  function () {
+    Route::controller(LocationController::class)->group(
+      function () {
+        Route::get('/{id}', 'readOne');
+        Route::get('/', 'readAll');
+      }
+    );
+  }
+);
+
+Route::prefix('properties')->name('properties.')->group(
+  function () {
+    Route::controller(PropertyController::class)->group(
+      function () {
+        Route::get('/{id}', 'readOne');
+        Route::get('/', 'readAll');
+      }
+    );
+  }
+);
+
+Route::prefix('posts')->name('posts.')->group(function () {
+  Route::controller(PostController::class)->group(function () {
+    Route::get('/{id}', 'readOne');
+    Route::get('/', 'readAll');
+  });
+});
+
+Route::prefix('categories')->name('categories.')->group(function () {
+  Route::controller(CategoryController::class)->group(function () {
+    Route::get('/{id}', 'readOne');
+    Route::get('/',    'readAll');
+  });
+});
+
+Route::prefix('tags')->name('tags.')->group(function () {
+  Route::controller(TagController::class)->group(function () {
+    Route::get('/{id}', 'readOne');
+    Route::get('/',    'readAll');
+  });
+});
 
 Route::get(
   '/hello',

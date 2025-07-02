@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Validation\Rule;
 
-class PriceHistory extends BaseModel
+class PropertyPriceHistory extends BaseModel
 {
   use HasFactory;
 

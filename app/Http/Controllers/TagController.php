@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Location;
+use App\Models\Tag;
 
-class LocationController extends CrudController
+class TagController extends CrudController
 {
-  protected $table = 'locations';
+  protected $table = 'tags';
+  protected $modelClass = Tag::class;
   protected $restricted = ['create', 'update', 'delete'];
-
-  protected $modelClass = Location::class;
 
   protected function getTable()
   {

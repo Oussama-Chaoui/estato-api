@@ -25,6 +25,8 @@ class PropertyController extends CrudController
     return $this->modelClass;
   }
 
+  protected $restricted = ['create', 'update', 'delete'];
+
   protected function afterReadOne($item, Request $request)
   {
     $item->load('rentals');

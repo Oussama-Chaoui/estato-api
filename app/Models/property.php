@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PROPERTY_STATUS;
 use App\Enums\PROPERTY_TYPE;
+use App\Models\Classes\DataTableParams;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Validation\Rule;
 
@@ -36,10 +37,13 @@ class Property extends BaseModel
     'images',
     'descriptions',
     'features',
+    'rentals',
+    'priceHistory',
   ];
 
   protected $casts = [
     'features' => 'array',
+    'has_vr' => 'boolean',
   ];
 
 
@@ -64,6 +68,26 @@ class Property extends BaseModel
         }
       }
     });
+  }
+
+  public function scopeDataTable($query, DataTableParams $params)
+  {
+    \Log::info('DataTableParams:', [
+      'checkPermission' => $params->checkPermission,
+      'orderColumn' => $params->orderColumn,
+      'orderDir' => $params->orderDir,
+      'filterParam' => $params->filterParam,
+    ]);
+
+    if ($params->hasOrderParam()) {
+      $query->dataTableSort($params->orderColumn, $params->orderDir);
+    }
+
+    if ($params->hasFilterParam()) {
+      $this->filter($query, $params->filterParam);
+    }
+
+    return $query;
   }
 
   public function location()
@@ -97,6 +121,11 @@ class Property extends BaseModel
   public function rentals()
   {
     return $this->hasMany(PropertyRental::class);
+  }
+
+  public function priceHistory()
+  {
+    return $this->hasMany(PropertyPriceHistory::class);
   }
 
   /**
