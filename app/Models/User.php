@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ROLE as ROLE_ENUM;
+use App\Models\Upload;
 use App\Notifications\ResetPasswordNotification;
 use DB;
 use Illuminate\Auth\Authenticatable;
@@ -34,13 +35,13 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     'email',
     'password',
     'phone',
+    'photo_id',
   ];
 
-  /**
-   * The attributes that should be hidden for serialization.
-   *
-   * @var array<int, string>
-   */
+  protected $with = [
+    'photo',
+  ];
+
   protected $hidden = [
     'roles',
     'permissions',
@@ -53,11 +54,6 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     'permissionsNames',
   ];
 
-  /**
-   * Get the attributes that should be cast.
-   *
-   * @return array<string, string>
-   */
   protected function casts(): array
   {
     return [
@@ -143,6 +139,11 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     return $this->hasOne(Agent::class);
   }
 
+  public function client()
+  {
+    return $this->hasOne(Client::class);
+  }
+
   public function propertyRented()
   {
     return $this->hasMany(PropertyRental::class, 'user_id');
@@ -158,6 +159,11 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     return $this->belongsToMany(Permission::class, 'users_permissions');
   }
 
+  public function photo()
+  {
+    return $this->belongsTo(Upload::class, 'photo_id');
+  }
+
   public function rolesTableReadPermissions(string $table)
   {
     return $this->hasManyDeepFromRelations($this->roles(), (new Role)->permissions())->where('permissions.name', 'like', $table . '%read');
@@ -170,13 +176,13 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 
   public function hasRole(ROLE_ENUM $role): bool
   {
-    return $this->roles->contains('name', $role->value);
+    return $this->roles->contains('name', $role);
   }
 
   public function assignRole(ROLE_ENUM $role)
   {
     $roleModel = Role::where('name', $role->value)->firstOrFail();
-    $this->roles()->save($roleModel);
+    $this->roles()->attach($roleModel->id);
   }
 
   public function syncRoles(array $roles)
@@ -209,7 +215,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 
   public function sendPasswordResetNotification($token)
   {
-    $this->notify(new ResetPasswordNotification($token));
+    $this->notify(new ResetPasswordNotification($token, app()->getLocale()));
   }
 
   public function rules($id = null)
@@ -218,17 +224,24 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     $rules = [
       'name'     => 'required|string|max:255',
       'phone'    => 'nullable|string',
-      'role' => [
+      'roles' => [
         'required',
+        'array',
+        'min:1',
+      ],
+      'roles.*' => [
         new Enum(ROLE_ENUM::class),
         'exists:roles,name',
       ],
-      'email' => 'required|email|unique:users,email',
-      'password' => 'required|string',
+      'email' => 'nullable|email|unique:users,email',
+      'photo_id' => 'nullable|exists:uploads,id',
     ];
+
     if ($id !== null) {
       $rules['email'] .= ',' . $id;
       $rules['password'] = 'nullable|string';
+    } else {
+      $rules['password'] = 'required|string';
     }
 
     return $rules;

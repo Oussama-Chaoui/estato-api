@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum INQUIRY_STATUS: string
 {
-  case NEW = 'new';
-  case CONTACTED = 'contacted';
-  case CLOSED = 'closed';
+  case NEW = 'NEW';
+  case CONTACTED = 'CONTACTED';
+  case CLOSED = 'CLOSED';
 }

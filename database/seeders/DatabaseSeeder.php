@@ -26,15 +26,18 @@ class DatabaseSeeder extends Seeder
       PermissionSeeder::class,
       CrudPermissionSeeder::class,
       UserSeeder::class,
+      SettingSeeder::class,
     ];
     if (!App::environment('prod') && !App::environment('preprod')) {
       $seeders = array_merge($seeders, [
         AgentSeeder::class,
         AmenitySeeder::class,
-        LocationSeeder::class,
+        RegionSeeder::class,
+        CitySeeder::class,
         PropertySeeder::class,
         CategorySeeder::class,
         TagSeeder::class,
+        NotificationSeeder::class,
       ]);
     }
 

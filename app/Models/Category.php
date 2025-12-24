@@ -11,6 +11,11 @@ class Category extends BaseModel
 
   protected $fillable = ['name', 'slug', 'description'];
 
+  protected $casts = [
+    'name' => 'array',
+    'description' => 'array',
+  ];
+
   public function posts()
   {
     return $this->belongsToMany(Post::class);
@@ -21,14 +26,22 @@ class Category extends BaseModel
     $id = $id ?? request()->route('id');
 
     return [
-      'name'        => 'required|string|max:100',
+      'name'        => 'required|array',
+      'name.en'     => 'nullable|string|max:100',
+      'name.fr'     => 'required|string|max:100',
+      'name.es'     => 'nullable|string|max:100',
+      'name.ar'     => 'required|string|max:100',
       'slug'        => [
         'required',
         'string',
         'max:100',
         Rule::unique('categories', 'slug')->ignore($id),
       ],
-      'description' => 'nullable|string',
+      'description' => 'nullable|array',
+      'description.en' => 'nullable|string',
+      'description.fr' => 'nullable|string',
+      'description.es' => 'nullable|string',
+      'description.ar' => 'nullable|string',
     ];
   }
 }

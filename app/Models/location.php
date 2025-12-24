@@ -10,11 +10,33 @@ class Location extends BaseModel
   use HasFactory;
 
   protected $fillable = [
-    'region',
-    'city',
+    'city_id',
+    'street_address',
     'latitude',
     'longitude',
   ];
+
+  protected $casts = [
+    'street_address' => 'array',
+  ];
+
+  public $with = ['city.region'];
+
+  /**
+   * Get the city that owns the location.
+   */
+  public function city()
+  {
+    return $this->belongsTo(City::class);
+  }
+
+  /**
+   * Get the region through city.
+   */
+  public function region()
+  {
+    return $this->hasOneThrough(Region::class, City::class, 'id', 'id', 'city_id', 'region_id');
+  }
 
   /**
    * Define relationship: A location can have many properties.
@@ -48,10 +70,14 @@ class Location extends BaseModel
     $id = $id ?? request()->route('id');
 
     return [
-      'region'    => 'required|string|max:255',
-      'city'      => 'required|string|max:255',
-      'latitude'  => 'required|numeric',
-      'longitude' => 'required|numeric',
+      'city_id'       => 'required|exists:cities,id',
+      'street_address'    => 'required|array',
+      'street_address.en' => 'nullable|string',
+      'street_address.fr' => 'required|string',
+      'street_address.es' => 'nullable|string',
+      'street_address.ar' => 'required|string',
+      'latitude'      => 'required|numeric|between:-90,90',
+      'longitude'     => 'required|numeric|between:-180,180',
     ];
   }
 }

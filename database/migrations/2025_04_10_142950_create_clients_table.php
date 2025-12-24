@@ -18,7 +18,6 @@ return new class extends Migration
       $table->string('passport')->nullable();
 
       $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-      $table->foreignId('image_id')->nullable()->constrained('uploads')->nullOnDelete();
       $table->timestamps();
     });
 

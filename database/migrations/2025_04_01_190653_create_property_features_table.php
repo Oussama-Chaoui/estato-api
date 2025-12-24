@@ -19,8 +19,6 @@ return new class extends Migration
       $table->integer('area');
       $table->integer('garages');
       $table->integer('floors')->default(1);
-      $table->boolean('pool')->default(false);
-      $table->boolean('garden')->default(false);
 
       $table->timestamps();
     });

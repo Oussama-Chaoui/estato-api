@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\AgentApplicationController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\PropertyRentalController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
@@ -42,8 +47,23 @@ Route::prefix('auth')->name('auth.')->group(
   }
 );
 
+Route::prefix('settings')->name('settings.')->group(function () {
+  Route::controller(SettingController::class)->group(function () {
+    Route::get('/website-focus', 'getWebsiteFocus');
+  });
+});
+
 Route::middleware('auth:api')->group(
   function () {
+    Route::prefix('dashboard')->name('dashboard.')->group(
+      function () {
+        Route::controller(DashboardController::class)->group(
+          function () {
+            Route::get('/statistics', 'getStatistics');
+          }
+        );
+      }
+    );
     Route::prefix('auth')->name('auth.')->group(
       function () {
         Route::controller(AuthController::class)->group(
@@ -77,6 +97,20 @@ Route::middleware('auth:api')->group(
             Route::put('/{id}', 'updateOne');
             Route::patch('/{id}', 'patchOne');
             Route::delete('/{id}', 'deleteOne');
+          }
+        );
+        Route::prefix('rentals')->name('rentals.')->group(
+          function () {
+            Route::controller(PropertyRentalController::class)->group(
+              function () {
+                Route::post('/', 'createOne');
+                Route::get('/{id}', 'readOne');
+                Route::get('/', 'readAll');
+                Route::put('/{id}', 'updateOne');
+                Route::patch('/{id}', 'patchOne');
+                Route::delete('/{id}', 'deleteOne');
+              }
+            );
           }
         );
       }
@@ -152,6 +186,15 @@ Route::middleware('auth:api')->group(
       });
     });
 
+    Route::prefix('agent-applications')->name('agent_applications.')->group(function () {
+      Route::controller(AgentApplicationController::class)->group(function () {
+        Route::get('/{id}', 'readOne');
+        Route::get('/', 'readAll');
+        Route::put('/{id}', 'updateOne');
+        Route::patch('/{id}', 'patchOne');
+      });
+    });
+
     Route::prefix('uploads')->name('uploads.')->group(
       function () {
         Route::controller(UploadController::class)->group(
@@ -166,12 +209,65 @@ Route::middleware('auth:api')->group(
         );
       }
     );
+
+    Route::prefix('settings')->name('settings.')->group(
+      function () {
+        Route::controller(SettingController::class)->group(
+          function () {
+            Route::put('/website-focus', 'updateWebsiteFocus');
+            Route::post('/', 'createOne');
+            Route::get('/{id}', 'readOne');
+            Route::get('/', 'readAll');
+            Route::put('/{id}', 'updateOne');
+            Route::patch('/{id}', 'patchOne');
+            Route::delete('/{id}', 'deleteOne');
+          }
+        );
+      }
+    );
+
+    Route::prefix('notifications')->name('notifications.')->group(
+      function () {
+        Route::controller(NotificationController::class)->group(
+          function () {
+            Route::get('/', 'index');
+            Route::get('/unread-count', 'unreadCount');
+            Route::patch('/{id}/mark-as-read', 'markAsRead');
+            Route::patch('/mark-all-as-read', 'markAllAsRead');
+            Route::delete('/{id}', 'destroy');
+            Route::delete('/', 'destroyAll');
+          }
+        );
+      }
+    );
+  }
+);
+
+Route::prefix('agents')->name('agents.')->group(
+  function () {
+    Route::controller(AgentController::class)->group(
+      function () {
+        Route::post('/apply', 'applyAsAgent');
+      }
+    );
   }
 );
 
 Route::prefix('locations')->name('locations.')->group(
   function () {
     Route::controller(LocationController::class)->group(
+      function () {
+        Route::get('/cities', 'readAllCitiesWithRegions');
+        Route::get('/{id}', 'readOne');
+        Route::get('/', 'readAll');
+      }
+    );
+  }
+);
+
+Route::prefix('amenities')->name('amenities.')->group(
+  function () {
+    Route::controller(AmenityController::class)->group(
       function () {
         Route::get('/{id}', 'readOne');
         Route::get('/', 'readAll');
@@ -186,6 +282,8 @@ Route::prefix('properties')->name('properties.')->group(
       function () {
         Route::get('/{id}', 'readOne');
         Route::get('/', 'readAll');
+        Route::get('/availability/{propertyId}', 'readPropertyAvailability');
+        Route::post('/search/filters', 'searchByFilters');
       }
     );
   }
@@ -194,6 +292,7 @@ Route::prefix('properties')->name('properties.')->group(
 Route::prefix('posts')->name('posts.')->group(function () {
   Route::controller(PostController::class)->group(function () {
     Route::get('/{id}', 'readOne');
+    Route::get('/slug/{slug}', 'readOneBySlug');
     Route::get('/', 'readAll');
   });
 });
@@ -229,7 +328,7 @@ Route::prefix('uploads')->name('uploads.')->group(
   }
 );
 
-Route::prefix('cloud')->name('cloud.')->group(
+Route::prefix('storage')->name('storage.')->group(
   function () {
     Route::get(
       '/{path}',

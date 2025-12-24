@@ -15,8 +15,6 @@ class PropertyFeature extends BaseModel
     'area',
     'garages',
     'floors',
-    'pool',
-    'garden',
   ];
 
   public function property()
@@ -34,8 +32,6 @@ class PropertyFeature extends BaseModel
       'area'        => 'required|integer|min:0',
       'garages'     => 'required|integer|min:0',
       'floors'      => 'required|integer|min:1',
-      'pool'        => 'boolean',
-      'garden'      => 'boolean',
     ];
   }
 }

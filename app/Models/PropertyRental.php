@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\RENTAL_TYPE;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 
 class PropertyRental extends BaseModel
 {
@@ -16,6 +18,7 @@ class PropertyRental extends BaseModel
     'start_date',
     'end_date',
     'price',
+    'type',
   ];
 
   protected $casts = [
@@ -52,6 +55,11 @@ class PropertyRental extends BaseModel
       'start_date'  => 'required|date',
       'end_date'    => 'required|date|after:start_date',
       'price'       => 'required|numeric|min:0',
+      'type' => [
+        'required',
+        'string',
+        Rule::in(array_column(RENTAL_TYPE::cases(), 'value'))
+      ],
     ];
   }
 }

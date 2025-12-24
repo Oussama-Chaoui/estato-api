@@ -43,8 +43,8 @@ return [
         ],
         'cloud' => [
             'driver' => 'local',
-            'root' => storage_path('app/cloud'),
-            'url' => env('API_URL').'/cloud',
+            'root' => storage_path('app/public'),
+            'url' => env('API_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
         ],

@@ -30,20 +30,20 @@ class PropertyAgent extends Pivot
     parent::booted();
 
     static::created(function ($pivot) {
-      $property = $pivot->property;
       $agent = $pivot->agent;
+      $propertyId = $pivot->property_id;
 
-      if ($agent && $agent->user) {
-        $agent->user->givePermission('properties.' . $property->id . '.read');
+      if ($agent && $agent->user && $propertyId) {
+        $agent->user->givePermission('properties.' . $propertyId . '.read');
       }
     });
 
     static::deleted(function ($pivot) {
-      $property = $pivot->property;
       $agent = $pivot->agent;
+      $propertyId = $pivot->property_id;
 
-      if ($agent && $agent->user) {
-        $agent->user->removeAllPermissions('properties', $property->id);
+      if ($agent && $agent->user && $propertyId) {
+        $agent->user->removeAllPermissions('properties', $propertyId);
       }
     });
   }

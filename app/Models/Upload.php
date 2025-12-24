@@ -32,13 +32,8 @@ class Upload extends BaseModel
 
     public function getPathWithoutDiskAttribute()
     {
-        $disk = Str::of($this->path)->explode('/')->first(
-            function ($value) {
-                return Str::of($value)->isNotEmpty();
-            }
-        );
-
-        return Str::of($this->path)->remove("$disk/")->toString();
+        // Remove the /storage/ prefix to get the relative path
+        return Str::of($this->path)->remove('/storage/')->toString();
     }
 
     public function getUrlAttribute()

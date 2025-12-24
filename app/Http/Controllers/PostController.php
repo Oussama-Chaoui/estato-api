@@ -29,10 +29,49 @@ class PostController extends CrudController
     $item->load(['categories', 'tags', 'images.upload', 'agent.user']);
   }
 
+  public function readOneBySlug($slug, Request $request)
+  {
+    try {
+      if (in_array('read_one', $this->restricted)) {
+        $user = $request->user();
+        if (! $user->hasPermission($this->table, 'read')) {
+          return response()->json([
+            'success' => false,
+            'errors'  => [__('common.permission_denied')],
+          ]);
+        }
+      }
+
+      $item = Post::where('slug', $slug)->first();
+
+      if (! $item) {
+        return response()->json([
+          'success' => false,
+          'errors'  => [__($this->table . '.not_found')],
+        ]);
+      }
+
+      if (method_exists($this, 'afterReadOne')) {
+        $this->afterReadOne($item, $request);
+      }
+
+      return response()->json([
+        'success' => true,
+        'data'    => ['item' => $item],
+      ]);
+    } catch (\Exception $e) {
+      \Log::error('PostController::readOneBySlug error: ' . $e->getMessage());
+      \Log::error($e->getTraceAsString());
+
+      return response()->json([
+        'success' => false,
+        'errors'  => [__('common.unexpected_error')],
+      ]);
+    }
+  }
+
   public function createOne(Request $request)
   {
-    \Log::info('PostController::createOne request data:', $request->all());
-
     try {
       return DB::transaction(function () use ($request) {
         $user = $request->user();
@@ -106,8 +145,6 @@ class PostController extends CrudController
 
   public function updateOne($id, Request $request)
   {
-    \Log::info('PostController::updateOne request data:', $request->all());
-
     try {
       return DB::transaction(function () use ($id, $request) {
         $user = $request->user();

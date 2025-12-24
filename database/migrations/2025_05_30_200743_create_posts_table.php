@@ -12,16 +12,16 @@ return new class extends Migration
     Schema::create('posts', function (Blueprint $table) {
       $table->id();
       $table->foreignId('agent_id')->constrained('agents')->onDelete('cascade');
-      $table->string('title');
+      $table->json('title');
       $table->string('slug')->unique();
-      $table->text('excerpt')->nullable();
-      $table->longText('content');
-      $table->enum('status', array_column(POST_STATUS::cases(), 'value'))->default('draft');
+      $table->json('excerpt')->nullable();
+      $table->json('content');
+      $table->enum('status', array_column(POST_STATUS::cases(), 'value'))->default(POST_STATUS::DRAFT->value);
       $table->timestamp('published_at')->nullable();
       $table->foreignId('image_id')->constrained('uploads')->cascadeOnDelete();
       // SEO meta
-      $table->string('meta_title')->nullable();
-      $table->string('meta_description')->nullable();
+      $table->json('meta_title')->nullable();
+      $table->json('meta_description')->nullable();
       $table->timestamps();
     });
   }

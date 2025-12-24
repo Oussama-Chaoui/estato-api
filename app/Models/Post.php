@@ -35,6 +35,11 @@ class Post extends BaseModel
   protected $casts = [
     'published_at' => 'datetime',
     'status'       => POST_STATUS::class,
+    'title' => 'array',
+    'excerpt' => 'array',
+    'content' => 'array',
+    'meta_title' => 'array',
+    'meta_description' => 'array',
   ];
 
   protected static function booted()
@@ -81,21 +86,46 @@ class Post extends BaseModel
     return $this->hasMany(PostImage::class);
   }
 
+  public function scopeDataTable($query, \App\Models\Classes\DataTableParams $params)
+  {
+    if ($params->hasOrderParam()) {
+      $query->dataTableSort($params->orderColumn, $params->orderDir);
+    }
+
+    if ($params->hasFilterParam()) {
+      $this->filter($query, $params->filterParam);
+    }
+
+    return $query;
+  }
+
   public function rules($id = null)
   {
     $id = $id ?? request()->route('id');
 
     return [
       'agent_id'         => 'required|exists:agents,id',
-      'title'            => 'required|string|max:255',
+      'title'            => 'required|array',
+      'title.en'         => 'nullable|string|max:255',
+      'title.fr'         => 'required|string|max:255',
+      'title.es'         => 'nullable|string|max:255',
+      'title.ar'         => 'required|string|max:255',
       'slug'             => [
         'required',
         'string',
         'max:255',
         Rule::unique('posts', 'slug')->ignore($id),
       ],
-      'excerpt'          => 'nullable|string',
-      'content'          => 'required|string',
+      'excerpt'          => 'nullable|array',
+      'excerpt.en'       => 'nullable|string',
+      'excerpt.fr'       => 'nullable|string',
+      'excerpt.es'       => 'nullable|string',
+      'excerpt.ar'       => 'nullable|string',
+      'content'          => 'required|array',
+      'content.en'       => 'nullable|string',
+      'content.fr'       => 'required|string',
+      'content.es'       => 'nullable|string',
+      'content.ar'       => 'required|string',
       'status'           => [
         'required',
         'string',
@@ -103,8 +133,16 @@ class Post extends BaseModel
       ],
       'published_at'     => 'nullable|date',
       'image_id'         => 'required|exists:uploads,id',
-      'meta_title'       => 'nullable|string|max:255',
-      'meta_description' => 'nullable|string|max:500',
+      'meta_title'       => 'nullable|array',
+      'meta_title.en'    => 'nullable|string|max:255',
+      'meta_title.fr'    => 'nullable|string|max:255',
+      'meta_title.es'    => 'nullable|string|max:255',
+      'meta_title.ar'    => 'nullable|string|max:255',
+      'meta_description' => 'nullable|array',
+      'meta_description.en' => 'nullable|string|max:500',
+      'meta_description.fr' => 'nullable|string|max:500',
+      'meta_description.es' => 'nullable|string|max:500',
+      'meta_description.ar' => 'nullable|string|max:500',
     ];
   }
 }

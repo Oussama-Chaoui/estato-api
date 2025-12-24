@@ -4,13 +4,13 @@ namespace App\Enums;
 
 enum PROPERTY_TYPE: string
 {
-  case HOUSE     = 'house';
-  case APARTMENT = 'apartment';
-  case VILLA     = 'villa';
-  case STUDIO    = 'studio';
-  case LAND      = 'land';
-  case COMMERCIAL = 'commercial';
-  case OFFICE    = 'office';
-  case GARAGE    = 'garage';
-  case MANSION   = 'mansion';
+  case HOUSE     = 'HOUSE';
+  case APARTMENT = 'APARTMENT';
+  case VILLA     = 'VILLA';
+  case STUDIO    = 'STUDIO';
+  case LAND      = 'LAND';
+  case COMMERCIAL = 'COMMERCIAL';
+  case OFFICE    = 'OFFICE';
+  case GARAGE    = 'GARAGE';
+  case MANSION   = 'MANSION';
 }

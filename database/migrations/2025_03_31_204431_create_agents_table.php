@@ -16,7 +16,6 @@ return new class extends Migration
       $table->string('licence_number')->unique();
       $table->integer('experience')->default(0);
       $table->string('bio')->nullable();
-      $table->foreignId('photo_id')->nullable()->constrained('uploads')->cascadeOnDelete();
       $table->string('agency_name');
       $table->string('agency_address');
       $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();

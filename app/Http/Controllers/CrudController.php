@@ -169,29 +169,49 @@ abstract class CrudController extends Controller
 
       if ($request->input('per_page', 50) === 'all') {
         $items = $query->get();
-      } else {
-        $items = $query->paginate($request->input('per_page', 50));
-      }
 
-      if (method_exists($this, 'afterReadAll')) {
-        $this->afterReadAll($items);
-      }
+        if (method_exists($this, 'afterReadAll')) {
+          $this->afterReadAll($items);
+        }
 
-      $items = collect(method_exists($items, 'items') ? $items->items() : $items);
+        $items = collect($items);
 
-      return response()->json(
-        [
-          'success' => true,
-          'data' => [
-            'items' => $items,
-            'meta' => [
-              'current_page' => method_exists($items, 'currentPage') ? $items->currentPage() : 1,
-              'last_page' => method_exists($items, 'lastPage') ? $items->lastPage() : 1,
-              'total_items' => method_exists($items, 'total') ? $items->total() : $items->count(),
+        return response()->json(
+          [
+            'success' => true,
+            'data' => [
+              'items' => $items,
+              'meta' => [
+                'current_page' => 1,
+                'last_page' => 1,
+                'total_items' => $items->count(),
+              ],
             ],
-          ],
-        ]
-      );
+          ]
+        );
+      } else {
+        $paginator = $query->paginate($request->input('per_page', 50));
+
+        if (method_exists($this, 'afterReadAll')) {
+          $this->afterReadAll($paginator);
+        }
+
+        $items = collect($paginator->items());
+
+        return response()->json(
+          [
+            'success' => true,
+            'data' => [
+              'items' => $items,
+              'meta' => [
+                'current_page' => $paginator->currentPage(),
+                'last_page' => $paginator->lastPage(),
+                'total_items' => $paginator->total(),
+              ],
+            ],
+          ]
+        );
+      }
     } catch (\Exception $e) {
       Log::error('Error caught in function CrudController.readAll: ' . $e->getMessage());
       Log::error($e->getTraceAsString());

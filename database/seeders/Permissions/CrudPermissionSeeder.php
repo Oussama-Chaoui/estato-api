@@ -19,11 +19,14 @@ class CrudPermissionSeeder extends Seeder
     // Create Scoped permissions
     $aclService->createScopePermissions('properties', ['create', 'read', 'read_own', 'update', 'delete']);
     $aclService->createScopePermissions('agents', ['create', 'read', 'update', 'delete']);
+    $aclService->createScopePermissions('agents_appliances', ['read', 'update']);
     $aclService->createScopePermissions('locations', ['create', 'read', 'update', 'delete']);
     $aclService->createScopePermissions('amenities', ['create', 'read', 'update', 'delete']);
     $aclService->createScopePermissions('posts', ['create', 'read', 'update', 'delete']);
     $aclService->createScopePermissions('categories', ['create', 'read', 'update', 'delete']);
     $aclService->createScopePermissions('tags', ['create', 'read', 'update', 'delete']);
+    $aclService->createScopePermissions('property_rentals', ['create', 'read', 'update', 'delete']);
+    $aclService->createScopePermissions('dashboard', ['read']);
 
     // Assign permissions to roles
     $adminRole = Role::where('name', ROLE_ENUM::ADMIN)->first();
@@ -32,11 +35,14 @@ class CrudPermissionSeeder extends Seeder
     // Assign to admin role
     $aclService->assignScopePermissionsToRole($adminRole, 'properties', ['create', 'read', 'update', 'delete']);
     $aclService->assignScopePermissionsToRole($adminRole, 'agents', ['create', 'read', 'update', 'delete']);
+    $aclService->assignScopePermissionsToRole($adminRole, 'agents_appliances', ['read', 'update']);
     $aclService->assignScopePermissionsToRole($adminRole, 'locations', ['create', 'read', 'update', 'delete']);
     $aclService->assignScopePermissionsToRole($adminRole, 'amenities', ['create', 'read', 'update', 'delete']);
     $aclService->assignScopePermissionsToRole($adminRole, 'posts', ['create', 'read', 'update', 'delete']);
     $aclService->assignScopePermissionsToRole($adminRole, 'categories', ['create', 'read', 'update', 'delete']);
     $aclService->assignScopePermissionsToRole($adminRole, 'tags', ['create', 'read', 'update', 'delete']);
+    $aclService->assignScopePermissionsToRole($adminRole, 'property_rentals', ['create', 'read', 'update', 'delete']);
+    $aclService->assignScopePermissionsToRole($adminRole, 'dashboard', ['read']);
 
     // Assign to agent role
     $aclService->assignScopePermissionsToRole($agentRole, 'properties', ['read']);
@@ -53,6 +59,7 @@ class CrudPermissionSeeder extends Seeder
     $adminRole = Role::where('name', ROLE_ENUM::ADMIN)->first();
     $aclService->removeScopePermissionsFromRole($adminRole, 'properties', ['create', 'read', 'update', 'delete']);
     $aclService->removeScopePermissionsFromRole($adminRole, 'agents', ['create', 'read', 'update', 'delete']);
+    $aclService->removeScopePermissionsFromRole($adminRole, 'agents_appliances', ['read', 'update']);
     $aclService->removeScopePermissionsFromRole($adminRole, 'locations', ['create', 'read', 'update', 'delete']);
     $aclService->removeScopePermissionsFromRole($adminRole, 'amenities', ['create', 'read', 'update', 'delete']);
     $aclService->removeScopePermissionsFromRole($adminRole, 'posts', ['create', 'read', 'update', 'delete']);

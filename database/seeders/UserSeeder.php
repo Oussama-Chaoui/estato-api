@@ -42,7 +42,6 @@ class UserSeeder extends Seeder
         [
           'nic_number' => 'NIC-1234567',
           'passport'   => null,
-          'image_id' => null,
         ]
       );
 
@@ -102,7 +101,6 @@ class UserSeeder extends Seeder
         [
           'nic_number' => 'NIC-1234567',
           'passport'   => null,
-          'image_id' => null,
         ]
       );
 

@@ -39,7 +39,7 @@ class UploadController extends CrudController
             $extension = $file->getClientOriginalExtension();
             $filename = time().'-'.Str::uuid().'.'.$extension;
             Storage::disk('cloud')->put($filename, $file->get());
-            $path = "/cloud/$filename";
+            $path = "/storage/$filename";
             $request->merge(['path' => $path]);
 
             return parent::createOne($request);
@@ -58,7 +58,7 @@ class UploadController extends CrudController
 
             $currentPath = $this->model()->find($id)->path;
             if ($currentPath) {
-                $currentPath = str_replace('/cloud', '', $currentPath);
+                $currentPath = str_replace('/storage', '', $currentPath);
                 Storage::disk('cloud')->delete($currentPath);
             }
 
@@ -66,7 +66,7 @@ class UploadController extends CrudController
             $extension = $file->getClientOriginalExtension();
             $filename = time().'-'.Str::uuid().'.'.$extension;
             Storage::disk('cloud')->put($filename, $file->get());
-            $path = "/cloud/$filename";
+            $path = "/storage/$filename";
             $request->merge(['path' => $path]);
 
             return parent::updateOne($id, $request);
@@ -150,7 +150,7 @@ class UploadController extends CrudController
                     ], 404
                 );
             }
-            $path = str_replace('/cloud', '', $upload->path);
+            $path = str_replace('/storage', '', $upload->path);
             if (! Storage::disk('cloud')->exists($path)) {
                 return response()->json(
                     [

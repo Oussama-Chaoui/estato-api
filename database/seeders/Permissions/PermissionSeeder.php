@@ -24,7 +24,6 @@ class PermissionSeeder extends Seeder
   public function run()
   {
     // Define roles
-    $userRole = $this->aclService->createRole(ROLE_ENUM::USER);
     $adminRole = $this->aclService->createRole(ROLE_ENUM::ADMIN);
     $agentRole = $this->aclService->createRole(ROLE_ENUM::AGENT);
     $clientRole = $this->aclService->createRole(ROLE_ENUM::CLIENT);

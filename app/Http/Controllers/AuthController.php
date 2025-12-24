@@ -57,7 +57,7 @@ class AuthController extends Controller
       if ($admin && ! $user->hasRole(ROLE::ADMIN)) {
         return response()->json(['success' => false, 'errors' => [__('auth.not_admin')]]);
       }
-      $token = $user->createToken('authToken', ['expires_in' => 60 * 24 * 30])->plainTextToken;
+      $token = $user->createToken('authToken')->plainTextToken;
 
       return response()->json(['success' => true, 'message' => __('auth.login_success'), 'data' => ['token' => $token]]);
     } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class AuthController extends Controller
             ]
           );
           $user->assignRole(ROLE::CLIENT);
-          $token = $user->createToken('authToken', ['expires_in' => 60 * 24 * 30])->plainTextToken;
+          $token = $user->createToken('authToken')->plainTextToken;
 
           return response()->json(['success' => true, 'data' => ['token' => $token], 'message' => __('auth.register_success')]);
         }

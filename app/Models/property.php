@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\FURNISHING_STATUS;
 use App\Enums\PROPERTY_STATUS;
 use App\Enums\PROPERTY_TYPE;
 use App\Models\Classes\DataTableParams;
@@ -15,7 +16,6 @@ class Property extends BaseModel
   protected $fillable = [
     'location_id',
     'title',
-    'street_address',
     'description',
     'monthly_price',
     'daily_price',
@@ -24,10 +24,12 @@ class Property extends BaseModel
     'monthly_price_enabled',
     'currency',
     'year_built',
-    'lot_size',
     'type',
     'status',
     'has_vr',
+    'featured',
+    'furnishing_status',
+    'sold_at',
   ];
 
   protected $with = [
@@ -44,12 +46,21 @@ class Property extends BaseModel
   protected $casts = [
     'features' => 'array',
     'has_vr' => 'boolean',
+    'featured' => 'boolean',
+    'title' => 'array',
+    'description' => 'array',
+    'sold_at' => 'datetime',
   ];
 
 
   protected static function booted()
   {
     parent::booted();
+
+    // Global scope to exclude sold properties from all queries
+    static::addGlobalScope('not_sold', function ($query) {
+      $query->where('status', '!=', PROPERTY_STATUS::SOLD->value);
+    });
 
     static::created(function ($property) {
       $agents = $property->agents;
@@ -68,6 +79,14 @@ class Property extends BaseModel
         }
       }
     });
+  }
+
+  /**
+   * Scope to include sold properties (for admin purposes)
+   */
+  public function scopeWithSold($query)
+  {
+    return $query->withoutGlobalScope('not_sold');
   }
 
   public function scopeDataTable($query, DataTableParams $params)
@@ -138,10 +157,17 @@ class Property extends BaseModel
   {
     $id = $id ?? request()->route('id');
     return [
-      'location_id'    => 'required|exists:locations,id',
-      'title'          => 'required|string|max:255',
-      'street_address' => 'required|string',
-      'description'    => 'required|string',
+      'location_id'    => $id ? 'required|exists:locations,id' : 'nullable|exists:locations,id',
+      'title'          => 'required|array',
+      'title.en'       => 'nullable|string|max:255',
+      'title.fr'       => 'required|string|max:255',
+      'title.es'       => 'nullable|string|max:255',
+      'title.ar'       => 'required|string|max:255',
+      'description'    => 'required|array',
+      'description.en' => 'nullable|string',
+      'description.fr' => 'required|string',
+      'description.es' => 'nullable|string',
+      'description.ar' => 'required|string',
       'monthly_price'  => 'required|numeric|min:0',
       'daily_price'    => 'required|numeric|min:0',
       'sale_price'     => 'required|numeric|min:0',
@@ -149,18 +175,18 @@ class Property extends BaseModel
       'monthly_price_enabled' => 'boolean',
       'currency'       => 'required|string',
       'year_built'     => 'required|integer',
-      'lot_size'       => 'required|integer|min:0',
       'type' => [
         'required',
         'string',
         Rule::in(array_column(PROPERTY_TYPE::cases(), 'value'))
       ],
-      'status' => [
+      'has_vr' => 'boolean',
+      'featured' => 'boolean',
+      'furnishing_status' => [
         'required',
         'string',
-        Rule::in(array_column(PROPERTY_STATUS::cases(), 'value'))
+        Rule::in(array_column(FURNISHING_STATUS::cases(), 'value'))
       ],
-      'has_vr' => 'boolean',
     ];
   }
 }

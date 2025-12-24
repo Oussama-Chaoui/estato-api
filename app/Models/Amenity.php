@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Classes\DataTableParams;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
@@ -18,6 +19,26 @@ class Amenity extends BaseModel
   public function properties()
   {
     return $this->belongsToMany(Property::class, 'properties_amenities')->withPivot('notes');
+  }
+
+  public function scopeDataTable($query, DataTableParams $params)
+  {
+    \Log::info('DataTableParams:', [
+      'checkPermission' => $params->checkPermission,
+      'orderColumn' => $params->orderColumn,
+      'orderDir' => $params->orderDir,
+      'filterParam' => $params->filterParam,
+    ]);
+
+    if ($params->hasOrderParam()) {
+      $query->dataTableSort($params->orderColumn, $params->orderDir);
+    }
+
+    if ($params->hasFilterParam()) {
+      $this->filter($query, $params->filterParam);
+    }
+
+    return $query;
   }
 
   public function rules($id = null)

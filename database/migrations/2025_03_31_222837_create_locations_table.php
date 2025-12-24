@@ -13,11 +13,8 @@ return new class extends Migration
   {
     Schema::create('locations', function (Blueprint $table) {
       $table->id();
-      $table->string('region');
-      $table->string('city');
-      // Ensure that each combination of region and city is unique
-      $table->unique(['region', 'city']);
-      // Using precision 10,7 for latitude/longitude
+      $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
+      $table->json('street_address');
       $table->decimal('latitude', 10, 7);
       $table->decimal('longitude', 10, 7);
       $table->timestamps();
