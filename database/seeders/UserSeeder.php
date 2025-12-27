@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
    */
   public function run()
   {
-    if (env('APP_ENV') === 'prod') {
+    if (app()->environment('prod')) {
       $admin = User::firstOrCreate(
         ['email' => 'admin@yakout-immo.com'],
         [
