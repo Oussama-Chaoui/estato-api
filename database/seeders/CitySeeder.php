@@ -14,7 +14,7 @@ class CitySeeder extends Seeder
     public function run(): void
     {
         // Read the JSON file
-        $jsonPath = storage_path('app/cloud/locations.json');
+        $jsonPath = database_path('seeders/data/cloud/locations.json');
         $data = json_decode(file_get_contents($jsonPath), true);
 
         $id = 1; // Start city IDs from 1

@@ -1,0 +1,614 @@
+[
+  {
+    "city": "Casablanca",
+    "lat": "33.5333",
+    "lng": "-7.5833",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Fès",
+    "lat": "34.0433",
+    "lng": "-5.0033",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Marrakech",
+    "lat": "31.6300",
+    "lng": "-8.0089",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Tangier",
+    "lat": "35.7767",
+    "lng": "-5.8039",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "Sale",
+    "lat": "34.0333",
+    "lng": "-6.8000",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Rabat",
+    "lat": "34.0209",
+    "lng": "-6.8416",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Meknès",
+    "lat": "33.8950",
+    "lng": "-5.5547",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Oujda-Angad",
+    "lat": "34.6867",
+    "lng": "-1.9114",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Kenitra",
+    "lat": "34.2500",
+    "lng": "-6.5833",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Agadir",
+    "lat": "30.4333",
+    "lng": "-9.6000",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Tétouan",
+    "lat": "35.5667",
+    "lng": "-5.3667",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "Taourirt",
+    "lat": "34.4169",
+    "lng": "-2.8850",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Temara",
+    "lat": "33.9267",
+    "lng": "-6.9122",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Safi",
+    "lat": "32.2833",
+    "lng": "-9.2333",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Khénifra",
+    "lat": "32.9394",
+    "lng": "-5.6675",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "El Jadid",
+    "lat": "33.2333",
+    "lng": "-8.5000",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Laâyoune",
+    "lat": "27.1536",
+    "lng": "-13.2033",
+    "admin_name": "Laâyoune-Sakia El Hamra"
+  },
+  {
+    "city": "Mohammedia",
+    "lat": "33.6833",
+    "lng": "-7.3833",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Kouribga",
+    "lat": "32.8833",
+    "lng": "-6.9167",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Béni Mellal",
+    "lat": "32.3394",
+    "lng": "-6.3608",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Ait Melloul",
+    "lat": "30.3342",
+    "lng": "-9.4972",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Nador",
+    "lat": "35.1667",
+    "lng": "-2.9333",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Taza",
+    "lat": "34.2167",
+    "lng": "-4.0167",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Settat",
+    "lat": "33.0000",
+    "lng": "-7.6167",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Barrechid",
+    "lat": "33.2667",
+    "lng": "-7.5833",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Al Khmissat",
+    "lat": "33.8167",
+    "lng": "-6.0667",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Inezgane",
+    "lat": "30.3658",
+    "lng": "-9.5381",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Ksar El Kebir",
+    "lat": "35.0090",
+    "lng": "-5.9000",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "My Drarga",
+    "lat": "30.3800",
+    "lng": "-9.4800",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Larache",
+    "lat": "35.1833",
+    "lng": "-6.1500",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "Guelmim",
+    "lat": "28.9833",
+    "lng": "-10.0667",
+    "admin_name": "Guelmim-Oued Noun"
+  },
+  {
+    "city": "Berkane",
+    "lat": "34.9167",
+    "lng": "-2.3167",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Ad Dakhla",
+    "lat": "23.7081",
+    "lng": "-15.9456",
+    "admin_name": "Dakhla-Oued Ed-Dahab"
+  },
+  {
+    "city": "Bouskoura",
+    "lat": "33.4489",
+    "lng": "-7.6486",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Al Fqih Ben Çalah",
+    "lat": "32.5000",
+    "lng": "-6.5333",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Oued Zem",
+    "lat": "32.8667",
+    "lng": "-6.5667",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Sidi Slimane",
+    "lat": "34.2600",
+    "lng": "-5.9200",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Errachidia",
+    "lat": "31.9319",
+    "lng": "-4.4244",
+    "admin_name": "Drâa-Tafilalet"
+  },
+  {
+    "city": "Guercif",
+    "lat": "34.2333",
+    "lng": "-3.3667",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Oulad Teïma",
+    "lat": "30.4000",
+    "lng": "-9.2167",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Ben Guerir",
+    "lat": "32.2300",
+    "lng": "-7.9500",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Sefrou",
+    "lat": "33.8300",
+    "lng": "-4.8300",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Fnidq",
+    "lat": "35.8500",
+    "lng": "-5.3500",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "Sidi Qacem",
+    "lat": "34.2167",
+    "lng": "-5.7000",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Tiznit",
+    "lat": "29.7167",
+    "lng": "-9.7167",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Moulay Abdallah",
+    "lat": "33.1978",
+    "lng": "-8.5883",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Youssoufia",
+    "lat": "32.2500",
+    "lng": "-8.5333",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Martil",
+    "lat": "35.6167",
+    "lng": "-5.2667",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "Aïn Harrouda",
+    "lat": "33.6372",
+    "lng": "-7.4483",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Souq Sebt Oulad Nemma",
+    "lat": "32.2948",
+    "lng": "-6.7007",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Skhirate",
+    "lat": "33.8500",
+    "lng": "-7.0300",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Ouezzane",
+    "lat": "34.8000",
+    "lng": "-5.5833",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "Sidi Yahya Zaer",
+    "lat": "33.7105",
+    "lng": "-6.8831",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Al Hoceïma",
+    "lat": "35.2472",
+    "lng": "-3.9322",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "M’diq",
+    "lat": "35.6858",
+    "lng": "-5.3253",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "Midalt",
+    "lat": "32.6800",
+    "lng": "-4.7300",
+    "admin_name": "Drâa-Tafilalet"
+  },
+  {
+    "city": "Azrou",
+    "lat": "33.4417",
+    "lng": "-5.2247",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "El Kelaa des Srarhna",
+    "lat": "32.0481",
+    "lng": "-7.4083",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Ain El Aouda",
+    "lat": "33.8111",
+    "lng": "-6.7922",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Beni Yakhlef",
+    "lat": "33.6555",
+    "lng": "-7.3221",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Ad Darwa",
+    "lat": "33.4167",
+    "lng": "-7.5333",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Al Aaroui",
+    "lat": "35.0029",
+    "lng": "-3.0311",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Qasbat Tadla",
+    "lat": "32.6000",
+    "lng": "-6.2667",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Boujad",
+    "lat": "32.7667",
+    "lng": "-6.4000",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Jerada",
+    "lat": "34.3117",
+    "lng": "-2.1636",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Mrirt",
+    "lat": "33.1667",
+    "lng": "-5.5667",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "El Aïoun",
+    "lat": "34.5852",
+    "lng": "-2.5056",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Azemmour",
+    "lat": "33.2878",
+    "lng": "-8.3422",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Temsia",
+    "lat": "30.3600",
+    "lng": "-9.4140",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Zagora",
+    "lat": "30.3306",
+    "lng": "-5.8381",
+    "admin_name": "Drâa-Tafilalet"
+  },
+  {
+    "city": "Ait Ourir",
+    "lat": "31.5644",
+    "lng": "-7.6628",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Aziylal",
+    "lat": "31.9669",
+    "lng": "-6.5694",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Sidi Yahia El Gharb",
+    "lat": "34.3058",
+    "lng": "-6.3058",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Biougra",
+    "lat": "30.2144",
+    "lng": "-9.3708",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Zaïo",
+    "lat": "34.9333",
+    "lng": "-2.7333",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Aguelmous",
+    "lat": "33.1500",
+    "lng": "-5.8333",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "El Hajeb",
+    "lat": "33.6928",
+    "lng": "-5.3711",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Zeghanghane",
+    "lat": "35.1500",
+    "lng": "-3.0000",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Imzouren",
+    "lat": "35.1500",
+    "lng": "-3.8500",
+    "admin_name": "Tanger-Tétouan-Al Hoceïma"
+  },
+  {
+    "city": "Tit Mellil",
+    "lat": "33.5533",
+    "lng": "-7.4822",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Mechraa Bel Ksiri",
+    "lat": "34.5600",
+    "lng": "-5.9500",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Al ’Attawia",
+    "lat": "31.8347",
+    "lng": "-7.3125",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Demnat",
+    "lat": "31.7311",
+    "lng": "-7.0361",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Arfoud",
+    "lat": "31.4361",
+    "lng": "-4.2328",
+    "admin_name": "Drâa-Tafilalet"
+  },
+  {
+    "city": "Tameslouht",
+    "lat": "31.5000",
+    "lng": "-8.1000",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Bou Arfa",
+    "lat": "32.5309",
+    "lng": "-1.9650",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Sidi Smai’il",
+    "lat": "32.8167",
+    "lng": "-8.5000",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Souk et Tnine Jorf el Mellah",
+    "lat": "34.4833",
+    "lng": "-5.5169",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Mehdya",
+    "lat": "34.2597",
+    "lng": "-6.6500",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Aïn Taoujdat",
+    "lat": "33.9333",
+    "lng": "-5.2167",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Chichaoua",
+    "lat": "31.5333",
+    "lng": "-8.7667",
+    "admin_name": "Marrakech-Safi"
+  },
+  {
+    "city": "Tahla",
+    "lat": "34.0500",
+    "lng": "-4.4200",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Oulad Yaïch",
+    "lat": "32.4167",
+    "lng": "-6.3333",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Moulay Bousselham",
+    "lat": "34.8786",
+    "lng": "-6.2933",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Iheddadene",
+    "lat": "35.1500",
+    "lng": "-2.9667",
+    "admin_name": "Oriental"
+  },
+  {
+    "city": "Missour",
+    "lat": "33.0500",
+    "lng": "-3.9833",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Zawyat ech Cheïkh",
+    "lat": "32.6414",
+    "lng": "-5.9206",
+    "admin_name": "Béni Mellal-Khénifra"
+  },
+  {
+    "city": "Bouknadel",
+    "lat": "34.1333",
+    "lng": "-6.7333",
+    "admin_name": "Rabat-Salé-Kénitra"
+  },
+  {
+    "city": "Oulad Tayeb",
+    "lat": "33.9598",
+    "lng": "-4.9954",
+    "admin_name": "Fès-Meknès"
+  },
+  {
+    "city": "Oulad Barhil",
+    "lat": "30.6408",
+    "lng": "-8.4750",
+    "admin_name": "Souss-Massa"
+  },
+  {
+    "city": "Bir Jdid",
+    "lat": "33.3737",
+    "lng": "-8.0002",
+    "admin_name": "Casablanca-Settat"
+  },
+  {
+    "city": "Tifariti",
+    "lat": "26.1580",
+    "lng": "-10.5670",
+    "admin_name": "Laâyoune-Sakia El Hamra"
+  }
+]
