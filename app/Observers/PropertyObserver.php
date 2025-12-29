@@ -29,21 +29,25 @@ class PropertyObserver
         $oldStatus = $property->getOriginal('status');
         $newStatus = $property->status;
 
+        // Convert enum to string if needed
+        $oldStatusString = $oldStatus instanceof PROPERTY_STATUS ? $oldStatus->value : (string) $oldStatus;
+        $newStatusString = $newStatus instanceof PROPERTY_STATUS ? $newStatus->value : (string) $newStatus;
+
         // Check if status changed to SOLD
-        if ($property->wasChanged('status') && $property->status === PROPERTY_STATUS::SOLD->value) {
+        if ($property->wasChanged('status') && $newStatusString === PROPERTY_STATUS::SOLD->value) {
             $property->sold_at = now();
             $property->saveQuietly(); // Avoid triggering another update event
         }
         
         // Check if status changed from SOLD to something else
-        if ($property->wasChanged('status') && $property->getOriginal('status') === PROPERTY_STATUS::SOLD->value) {
+        if ($property->wasChanged('status') && $oldStatusString === PROPERTY_STATUS::SOLD->value) {
             $property->sold_at = null;
             $property->saveQuietly(); // Avoid triggering another update event
         }
 
         // Send notification if status changed
-        if ($property->wasChanged('status') && $oldStatus !== $newStatus) {
-            $this->sendPropertyStatusChangeNotification($property, $oldStatus, $newStatus);
+        if ($property->wasChanged('status') && $oldStatusString !== $newStatusString) {
+            $this->sendPropertyStatusChangeNotification($property, $oldStatusString, $newStatusString);
         }
     }
 

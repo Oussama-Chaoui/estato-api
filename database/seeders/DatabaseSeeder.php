@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
       CrudPermissionSeeder::class,
       UserSeeder::class,
       SettingSeeder::class,
+      LanguageSeeder::class,
       AmenitySeeder::class,
       RegionSeeder::class,
       CitySeeder::class,

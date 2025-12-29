@@ -6,6 +6,7 @@ use App\Enums\ROLE;
 use App\Models\User;
 use App\Models\Agent;
 use App\Models\Client;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -155,7 +156,13 @@ class UserController extends CrudController
       $agentData['photo_id'] = $request->photo_id;
     }
 
-    Agent::create($agentData);
+    $agent = Agent::create($agentData);
+
+    // Sync languages if provided
+    if ($request->has('languages') && is_array($request->languages)) {
+      $languageIds = Language::whereIn('name', $request->languages)->pluck('id');
+      $agent->languages()->sync($languageIds);
+    }
   }
 
   private function updateOrCreateAgentProfile($user, $request)
@@ -172,7 +179,13 @@ class UserController extends CrudController
       $agentData['photo_id'] = $request->photo_id;
     }
 
-    $user->agent()->updateOrCreate(['user_id' => $user->id], $agentData);
+    $agent = $user->agent()->updateOrCreate(['user_id' => $user->id], $agentData);
+
+    // Sync languages if provided
+    if ($request->has('languages') && is_array($request->languages)) {
+      $languageIds = Language::whereIn('name', $request->languages)->pluck('id');
+      $agent->languages()->sync($languageIds);
+    }
   }
 
   private function createClientProfile($user, $request)
